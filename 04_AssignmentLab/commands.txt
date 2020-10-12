@@ -1,0 +1,42 @@
+  468  conda install emboss mafft
+  469  clear
+  470  ls
+  471  transeq tembl:x13776 seqdump.txt 
+  472  transeq seqdump.txt 
+  473  ls
+  474  head 1.txt
+  475  rm 1.txt 
+  476  transeq seqdump.txt -frame=2
+  477  ls
+  478  rm 1
+  479  transeq seqdump.txt -frame=2
+  480  rm 1.txt 
+  481  clear
+  482  transeq seqdump.txt -frame=3
+  483  transeq seqdump.txt 
+  484  rm 1.txt 
+  485  ls
+  486  mafft --amino AminoAcids_raw.txt > 1.txt
+  487  ls
+  488  transeq seqdump_BLASTN.txt -frame=1
+  489  head AminoAcids_raw.txt 
+  490  clear
+  491  mafft --localpair --amino --reorder AminoAcids_raw.txt 
+  492  cd qbb2020_new/
+  493  ls
+  494  cd 04_AssignmentLab/
+  495  ls
+  496* 
+  497  mafft --localpair --amino AminoAcids_raw.txt 
+  498  cd qbb2020_new/04_AssignmentLab/
+  499  mafft --amino --reorder AminoAcids_raw.txt 
+  500  clear
+  501  mafft --amino --reorder AminoAcids_raw.txt > Allignment_Mafft.txt
+  502  ls
+  503  head Allignment_Mafft.txt 
+  504  mv Allignment_Mafft.txt Alignment_Mafft.txt
+  505  ls
+  506  history
+  507* 
+  508  history | tail 42 > commands.txt
+  509  history | tail -n 42 > commands.txt
