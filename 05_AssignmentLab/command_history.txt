@@ -1,0 +1,52 @@
+  451  ls
+  452  for sample in CTCF_G1E input_G1E; do   bowtie2 -x chr19/chr19 -U ${sample}.fastq -S ${sample}.sam -p 6;   samtools view -bSo ${sample}.bam ${sample}.sam;   samtools sort ${sample}.bam -o ${sample}.sorted.bam;   samtools index ${sample}.sorted.bam; done
+  453  for sample in CTCF_ER4 input_ER4; do   bowtie2 -x chr19/chr19 -U ${sample}.fastq -S ${sample}.sam -p 6;   samtools view -bSo ${sample}.bam ${sample}.sam;   samtools sort ${sample}.bam -o ${sample}.sorted.bam;   samtools index ${sample}.sorted.bam; done
+  454  ls
+  455  macs2 callpeak -t CTCF_G1E.bam -c input_G1E.bam --format=BAM --name=CTCF_G1E --gsize=138000000 --tsize=26
+  456  macs2 callpeak -t CTCF_ER4.bam -c input_ER4.bam --format=BAM --name=CTCF_ER4 --gsize=138000000 --tsize=26
+  457  ls
+  458  bedtools intersect -a CTCF_G1E_summits.bed -b CTCF_ER4_summits.bed > CTCF_BindingGained.bed
+  459  bedtools intersect -v -a CTCF_G1E_summits.bed -b CTCF_ER4_summits.bed > CTCF_BindingLost.bed
+  460  ls
+  461  head CTCF_BindingGained.bed 
+  462  head CTCF_BindingLost.bed.bed 
+  463  head CTCF_BindingLost.bed
+  464  wget https://raw.githubusercontent.com/bxlab/qbb2020/master/week5/Mus_musculus.GRCm38.94_features.bed
+  465  head CTCF_G1E_summits.bed 
+  466  jupyter notebook
+  467  qbb2020_new/
+  468  cd qbb2020_new/05_AssignmentLab/
+  469  ls
+  470  rm Untitled.ipynb 
+  471  ls
+  472  grep exon Mus_musculus.GRCm38.94_features.bed 
+  473  grep exon Mus_musculus.GRCm38.94_features.bed > MusculusExon.bed
+  474  grep intron Mus_musculus.GRCm38.94_features.bed > MusculusIntron.bed
+  475  grep promoter Mus_musculus.GRCm38.94_features.bed > MusculusPromoter.bed
+  476  ls
+  477  head MusculusPromoter.bed 
+  478  head MusculusExo.bed 
+  479  head MusculusExon.bed 
+  480  head MusculusIntron.bed.bed 
+  481  head MusculusIntron.bed
+  482  bedtools intersect -a CTCF_G1E_summits.bed -b MusculusExon.bed > G1E_Exon_Overlap.bed
+  483  ls
+  484  head G1E_Exon_Overlap.bed 
+  485  bedtools intersect -a CTCF_G1E_summits.bed -b MusculusIntron.bed > G1E_Intron_Overlap.bed
+  486  bedtools intersect -a CTCF_G1E_summits.bed -b MusculusPromoter.bed > G1E_Promoter_Overlap.bed
+  487  bedtools intersect -a CTCF_ER4_summits.bed -b MusculusExon.bed > ER4_Exon_Overlap.bed
+  488  bedtools intersect -a CTCF_ER4_summits.bed -b MusculusIntron.bed > ER4_Intron_Overlap.bed
+  489  bedtools intersect -a CTCF_ER4_summits.bed -b MusculusPromoter.bed > ER4_Promoter_Overlap.bed
+  490  ls
+  491  cd
+  492  cd qbb2020_new/05_AssignmentLab/
+  493  ls
+  494  bedtools intersect -v -a CTCF_ER4_summits.bed -b CTCF_G1E_summits.bed > CTCF_BindingGained.bed
+  495  bedtools intersect -v -a CTCF_G1E_summits.bed -b CTCF_ER4_summits.bed > CTCF_BindingLost.bed
+  496  cd
+  497  jupyter notebook
+  498  cd qbb2020_new/05_AssignmentLab/
+  499  ls
+  500  history
+  501  history tail -n 52 > command_history.txt
+  502  history | tail -n 52 > command_history.txt

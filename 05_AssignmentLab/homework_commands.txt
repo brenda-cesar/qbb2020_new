@@ -1,0 +1,47 @@
+Commands Homework
+
+#This will index the ref file
+bowtie2-build chr19.fa.gz chr19
+
+#This will map the reads
+for sample in CTCF_G1E input_G1E
+do
+  bowtie2 -x chr19/chr19 -U ${sample}.fastq -S ${sample}.sam -p 6
+  samtools view -bSo ${sample}.bam ${sample}.sam
+  samtools sort ${sample}.bam -o ${sample}.sorted.bam
+  samtools index ${sample}.sorted.bam
+done
+
+for sample in CTCF_ER4 input_ER4
+do
+  bowtie2 -x chr19/chr19 -U ${sample}.fastq -S ${sample}.sam -p 6
+  samtools view -bSo ${sample}.bam ${sample}.sam
+  samtools sort ${sample}.bam -o ${sample}.sorted.bam
+  samtools index ${sample}.sorted.bam
+done
+
+#calling peaks
+macs2 callpeak -t CTCF_G1E.bam -c input_G1E.bam --format=BAM --name=CTCF_G1E --gsize=138000000 --tsize=26
+
+macs2 callpeak -t CTCF_ER4.bam -c input_ER4.bam --format=BAM --name=CTCF_ER4 --gsize=138000000 --tsize=26
+
+#Check where binding is gained
+bedtools intersect -v -a CTCF_ER4_summits.bed -b CTCF_G1E_summits.bed > CTCF_BindingGained.bed
+
+#Check where binding is lost
+bedtools intersect -v -a CTCF_G1E_summits.bed -b CTCF_ER4_summits.bed > CTCF_BindingLost.bed
+
+#Divide file by intron, exon and promoter
+grep exon Mus_musculus.GRCm38.94_features.bed > MusculusExon.bed
+grep intron Mus_musculus.GRCm38.94_features.bed > MusculusIntron.bed
+grep promoter Mus_musculus.GRCm38.94_features.bed > MusculusPromoter.bed
+
+#Search for overlapping between G1E and Musculus file
+bedtools intersect -a CTCF_G1E_summits.bed -b MusculusExon.bed > G1E_Exon_Overlap.bed
+bedtools intersect -a CTCF_G1E_summits.bed -b MusculusIntron.bed > G1E_Intron_Overlap.bed
+bedtools intersect -a CTCF_G1E_summits.bed -b MusculusPromoter.bed > G1E_Promoter_Overlap.bed
+
+#Search for overlapping between ER4 and Musculus file
+bedtools intersect -a CTCF_ER4_summits.bed -b MusculusExon.bed > ER4_Exon_Overlap.bed
+bedtools intersect -a CTCF_ER4_summits.bed -b MusculusIntron.bed > ER4_Intron_Overlap.bed
+bedtools intersect -a CTCF_ER4_summits.bed -b MusculusPromoter.bed > ER4_Promoter_Overlap.bed
