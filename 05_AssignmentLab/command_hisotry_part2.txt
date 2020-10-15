@@ -1,0 +1,243 @@
+  266  wget https://www.ebi.ac.uk/~emily/Online%20courses/NGS/ChIP-seq.zip
+  267  cd MasterNotebook/
+  268  unzip ChIP-seq.zip ChIP-seq.zip 
+  269  unzip ChIP-seq.zip
+  270  ls
+  271  cd ChIP-seq/
+  272  cd ..
+  273  cd
+  274  cd qbb2020_new/05_AssignmentLab/
+  275  cd MasterNotebook/
+  276  ls
+  277  bowtie-build bowtie_index/mm10.fa bowtie_index/mm10
+  278  cd qbb2020_new/05_AssignmentLab/MasterNotebook/
+  279  ls
+  280  bowtie2-build bowtie_index/mm10.fa bowtie_index/mm10
+  281  ccd qbb2020_new/05_AssignmentLab/MasterNotebook/bowtie_index/
+  282  cd qbb2020_new/05_AssignmentLab/MasterNotebook/bowtie_index/
+  283  bowtie2-build mm10.fa mm10
+  284  qbb2020_new/05_AssignmentLab/MasterNotebook/
+  285  ls
+  286  cd qbb2020_new/05_AssignmentLab/MasterNotebook/
+  287  ls
+  288  clear
+  289  wget https://www.ebi.ac.uk/~emily/Online%20courses/NGS/ChIP-seq.zip
+  290  cd qbb2020_new/05_AssignmentLab/
+  291  ls
+  292  bowtie-build chr19.fa.gz chr19
+  293  conda install bowtie2
+  294  cd qbb2020_new/05_AssignmentLab/MasterNotebook/
+  295  unzip ChIP-seq.zip 
+  296  unzip ChIP-seq.zip 
+  297  unzip ChIP-seq.zip 
+  298  cd ChIP-seq
+  299  bowtie2-build bowtie_index/mm10.fa bowtie_index/mm10
+  300  conda install bowtie2
+  301  cd qbb2020_new/05_AssignmentLab/
+  302  clear
+  303  ls
+  304  cd MasterNotebook/
+  305  ls
+  306  unzip ChIP-seq.zip 
+  307  clear
+  308  ls
+  309  cd ChIP-seq
+  310  ls
+  311  cd bowtie_index/
+  312  ls
+  313  bowtie2-build mm10.fa mm10
+  314  cd ../..
+  315  cd ..
+  316  ls
+  317  bowtie2-build chr19.fa.gz chr19
+  318  ls
+  319  cd MasterNotebook/
+  320  ls
+  321  for sample in Oct4 gfp; do   bowtie2 -x bowtie_index/mm10 -U ${sample}.fastq -S ${sample}.sam -p 6;   samtools view -bSo ${sample}.bam ${sample}.sam;   samtools sort ${sample}.bam -o ${sample}.sorted.bam;   samtools index ${sample}.sorted.bam; done
+  322  ls
+  323  ls
+  324  unzip ChIP-seq.zip 
+  325  cd ..
+  326  ls
+  327  ls
+  328  for sample in CTCF_G1E input_G1E; do   bowtie2 -x chr19/chr19 -U ${sample}.fastq -S ${sample}.sam -p 6;   samtools view -bSo ${sample}.bam ${sample}.sam;   samtools sort ${sample}.bam -o ${sample}.sorted.bam;   samtools index ${sample}.sorted.bam; done
+  329  for sample in CTCF_ER4 input_ER4; do   bowtie2 -x chr19/chr19 -U ${sample}.fastq -S ${sample}.sam -p 6;   samtools view -bSo ${sample}.bam ${sample}.sam;   samtools sort ${sample}.bam -o ${sample}.sorted.bam;   samtools index ${sample}.sorted.bam; done
+  330  ls
+  331  macs2 callpeak -t CTCF_G1E.bam -c input_G1E.bam --format=BAM --name=CTCF_G1E --gsize=138000000 --tsize=26
+  332  macs2 callpeak -t CTCF_ER4.bam -c input_ER4.bam --format=BAM --name=CTCF_ER4 --gsize=138000000 --tsize=26
+  333  ls
+  334  bedtools intersect -a CTCF_G1E_summits.bed -b CTCF_ER4_summits.bed > CTCF_BindingGained.bed
+  335  bedtools intersect -v -a CTCF_G1E_summits.bed -b CTCF_ER4_summits.bed > CTCF_BindingLost.bed
+  336  ls
+  337  head CTCF_BindingGained.bed 
+  338  head CTCF_BindingLost.bed.bed 
+  339  head CTCF_BindingLost.bed
+  340  wget https://raw.githubusercontent.com/bxlab/qbb2020/master/week5/Mus_musculus.GRCm38.94_features.bed
+  341  head CTCF_G1E_summits.bed 
+  342  jupyter notebook
+  343  qbb2020_new/
+  344  cd qbb2020_new/05_AssignmentLab/
+  345  ls
+  346  rm Untitled.ipynb 
+  347  ls
+  348  grep exon Mus_musculus.GRCm38.94_features.bed 
+  349  grep exon Mus_musculus.GRCm38.94_features.bed > MusculusExon.bed
+  350  grep intron Mus_musculus.GRCm38.94_features.bed > MusculusIntron.bed
+  351  grep promoter Mus_musculus.GRCm38.94_features.bed > MusculusPromoter.bed
+  352  ls
+  353  head MusculusPromoter.bed 
+  354  head MusculusExo.bed 
+  355  head MusculusExon.bed 
+  356  head MusculusIntron.bed.bed 
+  357  head MusculusIntron.bed
+  358  bedtools intersect -a CTCF_G1E_summits.bed -b MusculusExon.bed > G1E_Exon_Overlap.bed
+  359  ls
+  360  head G1E_Exon_Overlap.bed 
+  361  bedtools intersect -a CTCF_G1E_summits.bed -b MusculusIntron.bed > G1E_Intron_Overlap.bed
+  362  bedtools intersect -a CTCF_G1E_summits.bed -b MusculusPromoter.bed > G1E_Promoter_Overlap.bed
+  363  bedtools intersect -a CTCF_ER4_summits.bed -b MusculusExon.bed > ER4_Exon_Overlap.bed
+  364  bedtools intersect -a CTCF_ER4_summits.bed -b MusculusIntron.bed > ER4_Intron_Overlap.bed
+  365  bedtools intersect -a CTCF_ER4_summits.bed -b MusculusPromoter.bed > ER4_Promoter_Overlap.bed
+  366  ls
+  367  cd
+  368  cd qbb2020_new/05_AssignmentLab/
+  369  ls
+  370  bedtools intersect -v -a CTCF_ER4_summits.bed -b CTCF_G1E_summits.bed > CTCF_BindingGained.bed
+  371  bedtools intersect -v -a CTCF_G1E_summits.bed -b CTCF_ER4_summits.bed > CTCF_BindingLost.bed
+  372  cd
+  373  jupyter notebook
+  374  cd qbb2020_new/05_AssignmentLab/
+  375  ls
+  376  history
+  377  history tail -n 52 > command_history.txt
+  378  history | tail -n 52 > command_history.txt
+  379  head command_history.txt 
+  380  ls
+  381  git add CTCF_G1E_summits.bed 
+  382  git add CTCF_ER4_summits.bed 
+  383  git add CTCF_BindingGained.bed 
+  384  git add CTCF_BindingLost.bed 
+  385  git add command_history.txt 
+  386  git add Homework_05Part1.ipynb 
+  387  git add homework_commands.txt 
+  388  git add FinalPlot_Part1.png 
+  389  git commit
+  390  git submit
+  391  git submmit
+  392  git push
+  393  cd qbb2020_new/05_AssignmentLab/
+  394  ls
+  395  ls
+  396  clear
+  397  conda install meme -y
+  398  cd Ex1/
+  399  ls
+  400  head CTCF_ER4_peaks.narrowPeak 
+  401  CD
+  402  cd
+  403  jupyter notebook
+  404  cd qbb2020_new/05_AssignmentLab/
+  405  cd Ex1/
+  406  ls
+  407  clear
+  408  ls
+  409  awk '{print $2}' CTCF_ER4_peaks.narrowPeak 
+  410  head CTCF_ER4_peaks.narrowPeak 
+  411  awk '{print $5}' CTCF_ER4_peaks.narrowPeak 
+  412  awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort 
+  413  awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n
+  414  awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r
+  415  grep $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r) CTCF_ER4_peaks.narrowPeak 
+  416  awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100
+  417  grep $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100) CTCF_ER4_peaks.narrowPeak 
+  418  grep 1010 CTCF_ER4_peaks.narrowPeak 
+  419  for thing in awk $('{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100) ; do echo thing ; done
+  420  for thing in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100) ; do echo thing ; done
+  421  for thing in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100) ; echo $thing ; done
+  422  for thing in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do echo $thing; done
+  423  for thing in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do grep $thing CTCF_ER4_peaks.narrowPeak; done
+  424  for thing in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do grep $thing CTCF_ER4_peaks.narrowPeak; done | wc -l
+  425  for number in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do  grep $ awk '$2 == $number' CTCF_ER4_peaks.narrowPeak; done
+  426  for number in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do  grep $ awk '$2 == $number' CTCF_ER4_peaks.narrowPeak; done | wc -l
+  427  for number in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do  grep $number . CTCF_ER4_peaks.narrowPeak; done
+  428  for number in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do  grep $number . CTCF_ER4_peaks.narrowPeak; done | wc -l
+  429  awk '$3 == "1010"'
+  430  awk '$3 == "1010"' CTCF_ER4_peaks.narrowPeak 
+  431  awk '$5 == "1010"' CTCF_ER4_peaks.narrowPeak 
+  432  for number in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do  grep awk '$3 == "$number"' CTCF_ER4_peaks.narrowPeak; done
+  433  for number in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do  awk '$3 == "$number"' CTCF_ER4_peaks.narrowPeak; done
+  434  for number in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do  awk '$3 == "$number"' CTCF_ER4_peaks.narrowPeak; done
+  435  for number in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do  awk '$3 == "$number"' CTCF_ER4_peaks.narrowPeak; done
+  436  for number in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do  awk '$3 == "$number"' CTCF_ER4_peaks.narrowPeak; done
+  437  for number in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do  echo hello; awk '$3 == "$number"' CTCF_ER4_peaks.narrowPeak; done
+  438  for number in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do  echo $(awk '$3 == "$number"' CTCF_ER4_peaks.narrowPeak); done
+  439  for number in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do  awk '$3 == "$number"' CTCF_ER4_peaks.narrowPeak; done
+  440  $(for number in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100)
+  441  do 
+  442  awk '$3 == "$number"' CTCF_ER4_peaks.narrowPeak
+  443  $(for number in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100)
+  444  do 
+  445  awk '$3 == "$number"' CTCF_ER4_peaks.narrowPeak
+  446  for number in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do; awk '$3 == "$number"' CTCF_ER4_peaks.narrowPeak; done
+  447  for number in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do  awk '$3 == "$number"' CTCF_ER4_peaks.narrowPeak; done
+  448  echo $(for number in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do  awk '$3 == "$number"' CTCF_ER4_peaks.narrowPeak; done)
+  449  for number in $(awk '{print $5}' CTCF_ER4_peaks.narrowPeak | sort -n -r | head -n 100); do  awk '$3 == "$number"' CTCF_ER4_peaks.narrowPeak; done > hits.txt
+  450  ls
+  451  head hits.txt 
+  452  rm hits.txt 
+  453  sort -n -r -k 5 CTCF_ER4_peaks.narrowPeak
+  454  sort -n -r -k 5 CTCF_ER4_peaks.narrowPeak | wc -l 
+  455  sort -n -r -k 5n CTCF_ER4_peaks.narrowPeak | wc -l 
+  456  head CTCF_ER4.bam
+  457  ls
+  458  CTCF_ER4
+  459  head CTCF_ER4_summits.bed 
+  460  sort -n -r -k 5 CTCF_ER4_peaks.narrowPeak
+  461  sort -n -r -k 5 CTCF_ER4_peaks.narrowPeak | head -n 100
+  462  sort -n -r -k 5 CTCF_ER4_peaks.narrowPeak | head -n 100 > 100_TopPeaks.narrowPeak
+  463  cd ../
+  464  bedtools getfasta -fi chr19.fa -bed 100_TopPeaks.narrowPeak
+  465  ls
+  466  bedtools getfasta -fi chr19.fa.gz -bed 100_TopPeaks.narrowPeak
+  467  gunzip chr19.fa.gz 
+  468  gunzip chr19.fa.gz 
+  469  bedtools getfasta -fi chr19.fa -bed 100_TopPeaks.narrowPeak
+  470  ls
+  471  rm chr19.fa.fai 
+  472  bedtools getfasta -fi chr19.fa -bed 100_TopPeaks.narrowPeak > 100Peaks_Seq.fa
+  473  head 100Peaks_Seq.fa 
+  474  ls
+  475  cd motif_databases/
+  476  ls
+  477  cd MOUSE/
+  478  ls
+  479  head uniprobe_mouse.meme 
+  480  head -n 100 uniprobe_mouse.meme 
+  481  head -n 100 HOCOMOCOv10_MOUSE_mono_meme_format.meme 
+  482  head -n 100 HOCOMOCOv11_core_MOUSE_mono_meme_format.meme 
+  483  head -n 100 HOCOMOCOv11_full_MOUSE_mono_meme_format.meme 
+  484  head -n 100 chen2008.meme 
+  485  cd ../..
+  486  meme-chip -meme-maxw 20 -db motif_databases/MOUSE/HOCOMOCOv11_full_MOUSE_mono_meme_format.meme 100Peaks_Seq.fa
+  487  meme-chip -meme-maxw 20 100Peaks_Seq.fa
+  488  meme-chip -meme-maxw 20 -db motif_databases/MOUSE/HOCOMOCOv11_full_MOUSE_mono_meme_format.meme 100Peaks_Seq.fa
+  489  meme-chip -meme-maxw 20 100Peaks_Seq.fa
+  490  meme-chip -meme-maxw 20 -db motif_databases/MOUSE/HOCOMOCOv11_full_MOUSE_mono_meme_format.meme 100Peaks_Seq.fa
+  491  meme-chip -meme-maxw 20 -db motif_databases/MOUSE/HOCOMOCOv11_full_MOUSE_mono_meme_format.meme 100Peaks_Seq.fa
+  492  meme-chip -meme-maxw 20 -db motif_databases/MOUSE/HOCOMOCOv11_full_MOUSE_mono_meme_format.meme 100Peaks_Seq.fa 
+  493  meme-chip -meme-maxw 20 -db motif_databases/MOUSE/HOCOMOCOv11_full_MOUSE_mono_meme_format.meme 100Peaks_Seq.fa
+  494  meme-chip -meme-maxw 20 -db motif_databases/MOUSE/HOCOMOCOv11_full_MOUSE_mono_meme_format.meme 100Peaks_Seq.fa
+  495  cd qbb2020_new/05_AssignmentLab/
+  496  ls
+  497  meme-chip -meme-maxw 20 -db motif_databases/MOUSE/HOCOMOCOv11_full_MOUSE_mono_meme_format.meme 100Peaks_Seq.fa 
+  498  meme-chip -meme-maxw 20 -db motif_databases/MOUSE/HOCOMOCOv11_full_MOUSE_mono_meme_format.meme 100Peaks_Seq.fa 
+  499  meme-chip -meme-maxw 20 100Peaks_Seq.fa 
+  500  meme-chip -meme-maxw 20 100Peaks_Seq.fa 
+  501  tomtom -o ScannedMotifs motif_databases/JASPAR_CORE_2016.meme memechip_out/combined.meme
+  502  tomtom -o ScannedMotifs motif_databases/JASPAR/JASPAR_CORE_2016.meme memechip_out/combined.meme
+  503  ceqlogo -i memechip_out/combined.meme -o MotifLogo.eps -f EPS
+  504  ceqlogo -i ScannedMotifs/tomtom.txt -o MotifLogo.eps -f EPS
+  505  ceqlogo -i memechip_out/combined.meme -m 0 -o MotifLogo.eps -f EPS
+  506  epstopdf MotifLogo.eps
+  507  history
+  508  history | tail -n 243 > command_hisotry_part2.txt

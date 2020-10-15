@@ -1,0 +1,19 @@
+
+#Get top 100 peaks
+sort -n -r -k 5 CTCF_ER4_peaks.narrowPeak
+
+#Get sequences in a fasta file
+bedtools getfasta -fi chr19.fa -bed 100_TopPeaks.narrowPeak > 100Peaks_Seq.fa
+
+#Motif finding
+meme-chip -meme-maxw 20 100Peaks_Seq.fa 
+
+#scan motifs
+tomtom -o ScannedMotifs motif_databases/JASPAR/JASPAR_CORE_2016.meme memechip_out/combined.meme
+
+#Create motif logo
+ceqlogo -i memechip_out/combined.meme -m 0 -o MotifLogo.eps -f EPS
+
+#Convert logo from eps to pdf 
+epstopdf MotifLogo.eps
+
