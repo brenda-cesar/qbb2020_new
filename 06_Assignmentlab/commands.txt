@@ -1,0 +1,17 @@
+
+#Index reference genome using bismark_genome_preparation
+bismark_genome_preparation chr6
+
+#Running bismark
+bismark --fastq chr6 -1 E40ICM_SRR3083926_1.chr6.fastq,E55Epi_SRR3083929_1.chr6.fastq -2 E40ICM_SRR3083926_2.chr6.fastq,E55Epi_SRR3083929_2.chr6.fastq
+
+
+#Sort BAM file
+samtools sort -o E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam E40ICM_SRR3083926_1.chr6_bismark_bt2_pe.bam
+samtools sort -o E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam E55Epi_SRR3083929_1.chr6_bismark_bt2_pe.bam
+
+#Index BAM files
+samtools index E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam.bai
+samtools index E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam
+
+

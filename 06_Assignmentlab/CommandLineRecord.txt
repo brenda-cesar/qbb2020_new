@@ -1,0 +1,118 @@
+  381  git push
+  382  jupyter notebook
+  383  cd qbb2020_new/
+  384  ls
+  385  mkdir 06_Assignmentlab
+  386  cd 06_Assignmentlab/
+  387  ls
+  388  conda create -n week6 -c bioconda -c anaconda fastqc bismark samtools bowtie2 igv
+  389  ls
+  390  conda activate week6
+  391  clear
+  392  ls
+  393  gzip methylation_fastq.tar.gz 
+  394  mv SRR3083926_1.chr6.fastq E40ICM_SRR3083926_1.chr6.fastq 
+  395  ls
+  396  rm E40ICM_SRR3083926_1.chr6.fastq SRR308392
+  397  rm SRR3083926_2.chr6.fastq 
+  398  rm SRR3083929_1.chr6.fastq 
+  399  rm SRR3083929_2.chr6.fastq 
+  400  LS
+  401  clear
+  402  ls
+  403  mv SRR3083929_1.chr6.fastq E40ICM_SRR3083926_1.chr6.fastq 
+  404  clear
+  405  ls
+  406  mv SRR3083926_1.chr6.fastq E40ICM_SRR3083926_1.chr6.fastq 
+  407  mv SRR3083926_2.chr6.fastq E40ICM_SRR3083926_2.chr6.fastq 
+  408  mv SRR3083929_1.chr6.fastq E55Epi_SRR3083929_1.chr6.fastq 
+  409  mv SRR3083929_2.chr6.fastq E55Epi_SRR3083929_2.chr6.fastq 
+  410  clear
+  411  fastq E40ICM_SRR3083926_1.chr6.fastq 
+  412  fastqc E40ICM_SRR3083926_1.chr6.fastq 
+  413  gzip chr6.fa.gz 
+  414  gunzip chr6.fa.gz 
+  415  mkdir chr6
+  416  bismark_genome_preparation chr6/chr6.fa
+  417  bismark_genome_preparation chr6
+  418  bismark --genome chr6 -1 E40ICM_SRR3083926_1.chr6.fastq -2 E40ICM_SRR3083926_2.chr6.fastq
+  419  bismark --genome chr6 -1 E55Epi_SRR3083929_1.chr6.fastq -2 E55Epi_SRR3083929_2.chr6.fastq
+  420  samtools sort -o E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam -O bam 
+  421  samtools sort -o E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam -O bam E40ICM_SRR3083926_1.chr6_bismark_bt2_pe.bam
+  422  samtools sort -o E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam -O bam E55Epi_SRR3083929_1.chr6_bismark_bt2_pe.bam
+  423  rm E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam 
+  424  ls
+  425  clear
+  426  samtools sort -o E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam -O sam E40ICM_SRR3083926_1.chr6_bismark_bt2_pe.bam
+  427  samtools sort -o E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam -O sam E55Epi_SRR3083929_1.chr6_bismark_bt2_pe.bam
+  428  samtools index E40ICM_SRR3083926_1.chr6_bismark_bt2_pe.bam
+  429  samtools sort -o E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam E40ICM_SRR3083926_1.chr6_bismark_bt2_pe.bam
+  430  samtools sort -o E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam E55Epi_SRR3083929_1.chr6_bismark_bt2_pe.bam
+  431  samtools index E40ICM_SRR3083926_1.chr6_bismark_bt2_pe.bam
+  432  samtools index E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam
+  433  samtools index E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam
+  434  history
+  435  clear
+  436  igv --help
+  437  clear
+  438  igv E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam.bai
+  439  igv E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam.bai
+  440  igv E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam.bai
+  441  samtools index E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_index.bam
+  442  igv E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_index.bam
+  443  samtools index -c E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam
+  444  igv E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam.csi
+  445  samtools index E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam
+  446  samtools index E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam
+  447  bismark --fastq chr6 -1 SRR3083926_1.chr6.fastq,SRR3083929_1.chr6.fastq -2 SRR3083926_2.chr6.fastq,SRR3083929_2.chr6.fastq
+  448  bismark --fastq chr6 -1 E40ICM_SRR3083926_1.chr6.fastq,E55Epi_SRR3083929_1.chr6.fastq -2 E40ICM_SRR3083926_2.chr6.fastq,E55Epi_SRR3083929_2.chr6.fastq
+  449  samtools sort -o E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam E40ICM_SRR3083926_1.chr6_bismark_bt2_pe.bam
+  450  samtools sort -o E55Epi_SRR3083929_1.chr6_bismark_bt2_pe.bam E55Epi_SRR3083929_1.chr6_bismark_bt2_pe.bam
+  451  bismark --fastq chr6 -1 E40ICM_SRR3083926_1.chr6.fastq,E55Epi_SRR3083929_1.chr6.fastq -2 E40ICM_SRR3083926_2.chr6.fastq,E55Epi_SRR3083929_2.chr6.fastq
+  452  samtools sort -o E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam E40ICM_SRR3083926_1.chr6_bismark_bt2_pe.bam
+  453  samtools sort -o E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam E55Epi_SRR3083929_1.chr6_bismark_bt2_pe.bam
+  454  samtools index E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam
+  455  samtools index E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam
+  456  igv E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam.bai
+  457  igv E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam.bam
+  458  samtools index E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam
+  459  samtools index E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam
+  460  igv E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam.bai
+  461  E55Epi_SRR3083929_1.chr6_bismark_bt2_pe.bam
+  462  igv E55Epi_SRR3083929_1.chr6_bismark_bt2_pe.bam
+  463  samtools index E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam.bai E55Epi_SRR3083929_1.chr6.fastq
+  464  samtools index E55Epi_SRR3083929_1.chr6.fastq E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam.bai
+  465  igvtools index E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam
+  466  igv E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam.fai
+  467  igv E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam.fai
+  468  clear
+  469  history
+  470  cd qbb2020_new/06_Assignmentlab/
+  471  ls
+  472  bismark_methylation_extractor --bedgraph --comprehensive E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam
+  473  bismark_methylation_extractor --bedgraph --comprehensive E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam
+  474  ls
+  475  conda activate week6
+  476  bismark_methylation_extractor --bedgraph --comprehensive E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bam
+  477  bismark_methylation_extractor --bedgraph --comprehensive E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bam
+  478  ls
+  479  igv E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bedGraph.gz
+  480  ls
+  481  head -n 100 chr6_bismark_bt2_pe_sorted.bedGraph.gz
+  482  head -n 100 E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bedGraph.gz
+  483  E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bedGraph.gz
+  484  head -n 100 E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bedGraph.gz
+  485  gzip E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bedGraph.gz
+  486  gzip -d E40ICM_SRR3083926_1.chr6_bismark_bt2_pe_sorted.bedGraph.gz
+  487  gzip -d E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bedGraph
+  488  ls
+  489  head -n E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bedGraph 
+  490  head -n 100 E55Epi_SRR3083929_1.chr6_bismark_bt2_pe_sorted.bedGraph 
+  491  head -n 100 mm10_refseq_genes_chr6_50M_60M.bed 
+  492  jupyter notebook
+  493  conda install jupyterlab
+  494  jupyter notebook
+  495  jupyter notebook
+  496  history
+  497  cd qbb2020_new/06_Assignmentlab/
+  498  history | tail -n 118 > CommandLineRecord.txt
