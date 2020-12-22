@@ -1,0 +1,144 @@
+  402  tar -xvf week13_data.tar 
+  403  ls
+  404  cd week13_data
+  405  ls
+  406  cd reads
+  407  ls
+  408  cd ..
+  409  ls
+  410  cd KRAKEN/
+  411  ls
+  412  less -S SRR492183.kraken 
+  413  less -S SRR492183.kraken 
+  414  cd ../READS/
+  415  ls
+  416  less -S SRR492183_1.fastq 
+  417  less -S SRR492183_1.fastq 
+  418  cd ../KRAKEN/
+  419  ls
+  420  less -S SRR492183.kraken 
+  421  cd ..
+  422  ls
+  423  less -S assembly.fasta 
+  424  less -S KRAKEN/SRR492190.kraken 
+  425  conda create -n Assignment10_1 
+  426  conda activate Assignment10_1
+  427  conda install -c bioconda krona
+  428  clear
+  429  conda install jupyter
+  430  jupyter notebook
+  431  conda activate Assignment10_1
+  432  jupyter notebook
+  433  cd qbb2020_new/10_AssignmentLab/
+  434  ls
+  435  cd week13_data/Step3/binsbins
+  436  cd week13_data/Step3/bins
+  437  ls
+  438  head -n 10 bin.1.fa
+  439  less -S bin.1.fa
+  440  less -S bin.2.fa
+  441  cd ..
+  442  ls
+  443  rm -r bins
+  444  ls
+  445  tar -xvf bins.tar
+  446  ls
+  447  cd bins
+  448  head -n 10 bin.1.fa
+  449  grep NODE bin.1.fa
+  450  cd
+  451  jupyter
+  452  jupyter notebook
+  453  cd qbb2020_new/10_AssignmentLab/
+  454  ls
+  455  cd week13_data
+  456  ls
+  457  mkdir Step4
+  458  ls
+  459  cd Step4
+  460  ls
+  461  head -n 10 abundance_table.tab 
+  462  head -n 30 abundance_table.tab 
+  463  tail -n 30 abundance_table.tab 
+  464  grep SRR abundance_table.tab 
+  465  cd ..
+  466  cd Step3
+  467  ls
+  468  cd bins
+  469  ls
+  470  grep NODE bin.1.fa
+  471  nano matcher.sh
+  472  matcher.sh
+  473  chmod +x matcher.sh
+  474  matcher.sh
+  475  ls
+  476  matcher.sh
+  477  matcher.sh  bin*
+  478  rm matcher.sh
+  479  grep NODE bin.1.fa > bin1.txt
+  480  ls
+  481  less -S bin1.txt
+  482  grep NODE bin.2.fa > bin2.txt
+  483  grep NODE bin.3.fa > bin3.txt
+  484  grep NODE bin.4.fa > bin4.txt
+  485  grep NODE bin.5.fa > bin5.txt
+  486  grep NODE bin.6.fa > bin6.txt
+  487  grep NODE bin.7.fa > bin7.txt
+  488  grep NODE bin.8.fa > bin8.txt
+  489  ls
+  490  cd ../
+  491  ls
+  492  cd ..
+  493  ls
+  494  cd KRAKEN/
+  495  ls
+  496  cd ..
+  497  jupyter notebook
+  498  cd qbb2020_new/10_AssignmentLab/
+  499  ls
+  500  cd week13_data
+  501  cd Step3/
+  502  ls
+  503  cd bins
+  504  ls
+  505  head -n 10 bin.1.fa 
+  506  grep NODE_14_length_235766_cov_39.967778 ~/qbb2020_new/10_AssignmentLab/week13_data/KRAKEN/assembly.kraken 
+  507  head -n 10 bin.2.fa 
+  508  grep NODE_30_length_116726_cov_3.835555 ~/qbb2020_new/10_AssignmentLab/week13_data/KRAKEN/assembly.kraken 
+  509  head -n 10 bin.3.fa 
+  510  grep NODE_24_length_157060_cov_6.639394 ~/qbb2020_new/10_AssignmentLab/week13_data/KRAKEN/assembly.kraken 
+  511  head -n 10 bin.4.fa 
+  512  grep NODE_1_length_1447137_cov_2268.097092 ~/qbb2020_new/10_AssignmentLab/week13_data/KRAKEN/assembly.kraken 
+  513  head -n 10 bin.5.fa 
+  514  grep NODE_4_length_455101_cov_112.371015 ~/qbb2020_new/10_AssignmentLab/week13_data/KRAKEN/assembly.kraken 
+  515  head -n 10 bin.6.fa 
+  516  grep NODE_20_length_181746_cov_381.691663 ~/qbb2020_new/10_AssignmentLab/week13_data/KRAKEN/assembly.kraken 
+  517  head -n 10 bin.7.fa 
+  518  grep NODE_12_length_269228_cov_106.168966 ~/qbb2020_new/10_AssignmentLab/week13_data/KRAKEN/assembly.kraken 
+  519  head -n 10 bin.8.fa 
+  520  grep NODE_3_length_498518_cov_181.760000 ~/qbb2020_new/10_AssignmentLab/week13_data/KRAKEN/assembly.kraken 
+  521  cd ../..
+  522  ls
+  523  git add Step1
+  524  git add Step1.txt 
+  525  git add outfile_Step1.html 
+  526  cd reads
+  527  ls
+  528  less -s assembly.fasta.metabat-bins--unbinned
+  529  less -s assembly.fasta.depth.txt
+  530  cd ..
+  531  cd sTEP3
+  532  ls
+  533  cd bins
+  534  ls
+  535  git add Step3Info.txt Step3_Commands.txt 
+  536  cd ../..
+  537  ls
+  538  git add Assignment10_notebook.ipynb 
+  539  cd ..
+  540  git add Questions.txt 
+  541  git push
+  542  git commit
+  543  git push
+  544  history
+  545  history | tail -n 144 > history.txt 
