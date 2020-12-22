@@ -1,0 +1,4 @@
+Step 1
+
+Command to view a detailed taxonomic breakdown of all 8 samples to see how the gut microbiota changes across the days following birth
+ktImportText -q * (or all reformated files) -o single.outfile.name.html

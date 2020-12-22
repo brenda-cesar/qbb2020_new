@@ -1,0 +1,19 @@
+Step 3:
+
+#Search all the sequences in the files
+grep NODE bin.1.fa >> bins.txt
+grep NODE bin.2.fa >> bins.txt
+grep NODE bin.3.fa >> bins.txt
+grep NODE bin.4.fa >> bins.txt
+grep NODE bin.5.fa >> bins.txt
+grep NODE bin.6.fa >> bins.txt
+grep NODE bin.7.fa >> bins.txt
+grep NODE bin.8.fa >> bins.txt
+
+#Delete ">" from the names in the sequences
+sed 's/^.//' bins.txt > bins_new.txt
+
+#Search in the Kraken file the sequence numbers of the bins_new.txt file
+
+cat bins_new.txt | while read line; do grep $line ../../KRAKEN/assembly.kraken >> Step3Info.txt ; done
+

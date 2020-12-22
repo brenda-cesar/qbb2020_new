@@ -1,0 +1,23 @@
+Step 1:
+ktImportText -q *_rew.kraken -o outfile_Step1.html
+
+Step 2:
+1) Index the "reference" genome:
+bwa index assembly.fasta
+
+2)Alignment:
+#!/bin/bash
+
+for SEQ in *.bam
+do
+	bwa mem -R "@RG\tID:${SEQ}\tSM:${SEQ}" "assembly.fasta" ${SEQ} > ${SEQ}.bam
+done
+
+3)Sorting
+samtools sort -o {SEQ}.bam -O bam {SEQ}
+
+2)Run Metabat
+runMetaBat.sh --unbinned assembly.fasta *_1s.fastq.bam
+
+
+
