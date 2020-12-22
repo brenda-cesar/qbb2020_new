@@ -1,0 +1,107 @@
+  396  clear
+  397  conda create -n hifive hifive python=2 matplotlib bedtools pyBigWig
+  398  conda activate hifive
+  399  clear
+  400  ls
+  401  tar xzf 3DGenomeData.tar.gz
+  402  ls
+  403  cd data
+  404  ls
+  405  hifive --help
+  406  > hifive fends -L mm9.len --binned 10000 -g mm9 -q MM9_Partition1
+  407  hifive fends -L mm9.len --binned 10000 -g mm9 -q MM9_Partition1
+  408  ls
+  409  cd MM9_Partition1 
+  410  hifive hic-data -X data/WT_100kb/raw_\*.mat MM9_Partition1 -q InteractionCounts
+  411  hifive hic-data -X data/WT_100kb/raw_\*.mat MM9_Partition1 -q InteractionCounts.hic
+  412  ls
+  413  rm MM9_Partition1 
+  414  hifive fends -L mm9.len --binned 10000 -g mm9 -q MM9_Partition1.fends
+  415  hifive hic-data -X data/WT_100kb/raw_\*.mat MM9_Partition1.fends -q InteractionCounts.hic
+  416  ls
+  417  hifive hic-data -X WT_100kb/raw_\*.mat MM9_Partition1.fends -q InteractionCounts.hic
+  418  ls
+  419  hifive hic-data -X data/WT_100kb/raw_\*.mat MM9_Partition1.fends -q InteractionCounts.hic
+  420  ls
+  421  cd ..
+  422  ls
+  423  cd genome/
+  424  ls
+  425  ls
+  426  cd ..
+  427  ls
+  428  cd data
+  429  ls
+  430  rm MM9_Partition1.fends 
+  431  ls
+  432  cd ..
+  433  cd genome/
+  434  hifive fends -L mm9.len --binned 10000 -g mm9 -q MM9_Partition1.fends
+  435  ls
+  436  cd ..
+  437  cd data/
+  438  hifive hic-data -X data/WT_100kb/raw_\*.mat ../genome/MM9_Partition1.fends -q InteractionCounts.hic
+  439  ls
+  440  clear
+  441  hifive hic-project -f 25 -j 100000 -n 25 InteractionCounts.hic ProjectFile.hic
+  442  ls
+  443  cd
+  444  cd qbb2020_new/09_AssignmentLab/
+  445  ls
+  446  cd genome/
+  447  ls
+  448  cd ..
+  449  cd data/
+  450  ls
+  451  hifive hic-project -f 25 -j 100000 -n 25 InteractionCounts.hic ProjectFile.hic
+  452  ls
+  453  hifive hic-project -f 25 -j 100000 -n 25 InteractionCounts.hic ProjectFile.hic
+  454  ls
+  455  ls ../genome/
+  456  clear
+  457  ls
+  458  rm InteractionCounts.hic 
+  459  cd ../genome/
+  460  ls
+  461  rm MM9
+  462  rm MM9_Partition1.fends 
+  463  > hifive fends -L mm9.len --binned 10000 -g mm9 MM9_Partition1.fends
+  464  hifive fends -L mm9.len --binned 10000 -g mm9 MM9_Partition1.fends
+  465  ls
+  466  cd ..
+  467  cd data/
+  468  ifive hic-data -X data/WT_100kb/raw_\*.mat ../genome/MM9_Partition1.fends InteractionCounts.hic
+  469  hifive hic-data -X data/WT_100kb/raw_\*.mat ../genome/MM9_Partition1.fends InteractionCounts.hic
+  470  hifive hic-project -f 25 -j 100000 -n 25 InteractionCounts.hic ProjectFile.hic
+  471  cd ..
+  472  cd data/
+  473  ls
+  474  rm InteractionCounts.hic 
+  475  cd ..
+  476  ls
+  477  hifive hic-data -X data/WT_100kb/raw_\*.mat ../genome/MM9_Partition1.fends InteractionCounts.hic
+  478  hifive hic-data -X data/WT_100kb/raw_\*.mat genome/MM9_Partition1.fends InteractionCounts.hic
+  479  ls
+  480  hifive hic-project -f 25 -j 100000 -n 25 InteractionCounts.hic ProjectFile.hic
+  481  hifive hic-normalize express -f 25 -w cis ProjectFile.hic
+  482  ls
+  483  mv genome/MM9_Partition1.fends ../
+  484  ls
+  485  cd genome/
+  486  ls
+  487  ls
+  488  hifive fends -L mm9.len --binned 10000 -g mm9 MM9_Partition1.fends
+  489  cd ..
+  490  ls
+  491  jupyter
+  492  conda install jupyter
+  493  jupyter
+  494  jupyter notebook
+  495  jupyter notebook
+  496  conda activate hifive
+  497  jupyter notebook
+  498  history
+  499  history tail -n 102
+  500  history |tail -n 102
+  501  cd qbb2020_new/09_AssignmentLab/
+  502  history | tail -n 107 > CommandHistory.txt

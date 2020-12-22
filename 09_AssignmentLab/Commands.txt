@@ -1,0 +1,19 @@
+Step 1: create a genomic partition file
+> hifive fends [-h] (-F FEND | -B BED | -L LENGTH) [--binned] [-r RE] [-g GENOME] [-q] output
+> hifive fends -L mm9.len --binned 10000 -g mm9 MM9_Partition1.fends
+
+Step 2: create a data file containing counts of interaction reads for each of the pairs of partitions 
+> hifive hic-data [-h] (-S BAM BAM | -R RAW | -M MAT | -X MATRIX) [-i INSERT] [--skip-duplicate-filtering] [-q] fend output
+> hifive hic-data -X data/WT_100kb/raw_\*.mat genome/MM9_Partition1.fends InteractionCounts.hic
+
+Step 3: create a project file, which will track filtering and normalization information. 
+> [mpirun -np NP] hifive hic-project [-h] [-f MININT] [-m MINDIST]
+                      [-x MAXDIST] [-j MINBIN] [-n NUMBINS] [-q] data
+                      output
+> hifive hic-project -f 25 -j 100000 -n 25 InteractionCounts.hic ProjectFile.hic
+
+Step 4: normalize the data to remove bias from PCR, GC content, mappability, and fragment length
+> [mpirun -np NP] hifive hic-normalize <SUBCOMMAND> [-h] [-m MINDIST]
+                      [-x MAXDIST] [-c CHROMS] [-o OUTPUT] [-q]
+                      [normalization options] project
+> hifive hic-normalize express -f 25 -w cis ProjectFile.hic
